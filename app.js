@@ -1,5 +1,5 @@
 const API =
-"https://script.google.com/macros/s/AKfycbw7tghQa0V5dExb0R9_piVP5aMH_GvUpGrM-UHGxXHzMX0dwdbomRW-7ACT0bK6W7Ii/exec";
+"https://script.google.com/macros/s/AKfycbxvNeTGTDlrwNBiKmzt9pzSRYvUw64H0fXC7rojGwOSvMEINZpMPLPlOJqxYgizkz9y/exec";
 
 let scanner;
 let lastScan = "";
