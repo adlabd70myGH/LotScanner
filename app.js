@@ -13,38 +13,41 @@ function beep() {
     audio.play();
 }
 
-async function saveLot(code){
+function saveLot(code){
 
-    statusBox().innerHTML="Saving...";
+    statusBox().innerHTML = "Saving...";
 
-    try{
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = API;
+    form.target = "hidden_iframe";
 
-        await fetch(API,{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify({
-                lot:code,
-                device:navigator.userAgent
-            })
-        });
+    const lot = document.createElement("input");
+    lot.type = "hidden";
+    lot.name = "lot";
+    lot.value = code;
 
-        statusBox().innerHTML="✅ Saved<br>"+code;
+    const device = document.createElement("input");
+    device.type = "hidden";
+    device.name = "device";
+    device.value = navigator.userAgent;
 
-        if(navigator.vibrate){
-            navigator.vibrate(150);
-        }
+    form.appendChild(lot);
+    form.appendChild(device);
 
-        beep();
+    document.body.appendChild(form);
 
+    form.submit();
+
+    document.body.removeChild(form);
+
+    statusBox().innerHTML = "✅ Saved<br>" + code;
+
+    if(navigator.vibrate){
+        navigator.vibrate(150);
     }
-    catch(e){
 
-        statusBox().innerHTML="❌ Save Failed";
-
-    }
-
+    beep();
 }
 
 function onScanSuccess(decodedText){
